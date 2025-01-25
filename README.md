@@ -15,6 +15,6 @@ Tests and experiences. Mostly Python.
 - try HF's smolagents (and watch https://www.youtube.com/watch?v=c8EpB4zmXG0&t=18s&ab_channel=SamWitteveen)
 - explore PocketPal or a way to run a quantized model in the phone / summarize geocaching logs
 
-# General notes
+# Stuffs
 
-[General hints, links and notes](GeneralNotes.md)
+- [General hints, links and notes](GeneralNotes.md)
