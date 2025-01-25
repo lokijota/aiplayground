@@ -12,7 +12,7 @@ Tests and experiences. Mostly Python.
 - do a langchain sample
 - do a langgraph sample
 - test autogen / multi-LLM scenario
-- try HF's smolagents
+- try HF's smolagents (and watch https://www.youtube.com/watch?v=c8EpB4zmXG0&t=18s&ab_channel=SamWitteveen)
 
 # General notes
 
