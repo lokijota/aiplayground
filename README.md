@@ -1,7 +1,9 @@
-# aiplayground
+# Jota's playground - just a space for small experiments
 
 Tests and experiences. Mostly Python.
 
+
+# Experiments
 
 
 # To-do list
@@ -10,6 +12,7 @@ Tests and experiences. Mostly Python.
 - do a langchain sample
 - do a langgraph sample
 - test autogen / multi-LLM scenario
+- try HF's smolagents
 
 # General notes
 
