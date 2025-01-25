@@ -9,4 +9,5 @@
   -  `python3 -m venv .venv` - Create environment in the current folder 
   -  `source .venv/bin/activate` - Activate an environment (run from root of project)
   - `deactivate` - Deactivate an environment
+  - `pip freeze > requirements.txt` - extract venv's pip packages into a requirements file
 

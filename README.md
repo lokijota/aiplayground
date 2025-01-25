@@ -5,6 +5,7 @@ Tests and experiences. Mostly Python.
 
 # Experiments
 
+- [Model completions calling either using http requests or with OpenAI's library](01.OllamaViaAPI/)
 
 # To-do list
 
