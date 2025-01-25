@@ -5,7 +5,7 @@ Tests and experiences. Mostly Python.
 
 # Experiments
 
-- [Model completions calling either using http requests or with OpenAI's library, inc structured outputs](01.ModelCalling/README.md)
+- [Model completions calling either using http requests or with OpenAI's library, inc structured outputs and image understanding](01.ModelCalling/README.md)
 
 # To-do list
 
@@ -24,3 +24,4 @@ Tests and experiences. Mostly Python.
 # Stuffs
 
 - [General hints, links and notes](GeneralNotes.md)
+- [Tutorials or other things to try](TutorialsAndLinks.md)
