@@ -26,3 +26,7 @@ From: https://www.reddit.com/r/LocalLLaMA/comments/1frwnpj/llama_32_vision_model
 
   - https://arxiv.org/abs/2010.11929
   - https://ai.meta.com/research/publications/the-llama-3-herd-of-models/
+
+## On Llava
+
+Llava has a strange behaviour. It seems to concatenate multiple images and then overlay the text. Semi random outputs and unable to find the response.

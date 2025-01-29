@@ -44,7 +44,7 @@ def call_model(prompt, image1, image2):
 
 
     response = client.chat.completions.create(
-        model="minicpm-v",
+        model="minicpm-v", #llama vision only supports 1 image, llava seems to concatenate images and process as one with the text as overlay and didn't get good results.
         messages=[
             {
                 "role": "user",
