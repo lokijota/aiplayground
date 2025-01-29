@@ -1,6 +1,10 @@
 import base64
 from openai import OpenAI
 
+###################################################################################
+## THIS CODE DOESN'T WORK WITH llama3.2-vision, THE CALL TO THE MODEL NEVER RETURNS
+###################################################################################
+
 client = OpenAI(
     base_url = 'http://localhost:11434/v1',
     api_key='ollama', # required, but unused
@@ -40,7 +44,7 @@ def call_model(prompt, image1, image2):
 
 
     response = client.chat.completions.create(
-        model="llama3.2-vision",
+        model="minicpm-v",
         messages=[
             {
                 "role": "user",
@@ -60,15 +64,23 @@ def call_model(prompt, image1, image2):
                 ],
             }
         ],
-        temperature=0.8
+        # temperature=0.8
     )
 
     return response
 
 
-response = call_model("What could there be in common in these images? Both in the visual composition but other aspects, like where they were most taken, etc?",\
-                       "image3.png", "image6.jpg")
+response = call_model("From which country are these two photos from? Use whatever visual cues you have, like signs and its text, clothing, skin colour, architecture styles, to make a deduction.", "image6.jpg", "image3.png")
 model_output = response.choices[0].message.content
 print(model_output)
 
 print("Total tokens:", response.usage.total_tokens, "\n")
+
+# Correct response, even if it didn't identify the bridge:
+# 
+# ****** For image image6.jpg & image3.png, asking: From which country are these two photos from? Use whatever visual cues you have, like signs and its text, clothing, skin colour, architecture styles, to make a deduction.
+# The first photo shows a bridge with illuminated cables at night. The structure appears modern, likely indicating a developed area within Europe due to the style of construction which is common in countries such as Germany or Scandinavian nations where engineering and infrastructure are well maintained during nighttime lighting for safety reasons and aesthetic appeal.
+#
+# The second photo depicts people outside what seems to be an administrative building with signage that includes Portuguese. The architecture has distinctive European features, including stone pavement and a white-walled structure with red-tiled roofs, which is characteristic of Portugal or another neighboring country in Southern Europe.
+#
+# Given the visible signs and architectural cues such as cobblestone streets and style buildings similar to what are found throughout many parts of southern and western Europe but particularly fitting Portuguese culture where this architecture is prominent. Therefore, it's reasonable to deduce that these photos were taken in Portugal.

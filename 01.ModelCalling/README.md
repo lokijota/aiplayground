@@ -12,4 +12,4 @@ All the samples call locally-running models on ollama.
 
 - `vision_openai_api.py` - same calls as in the previous example but using the Openai API.
 
-- `vision_openai_api_2images.py` - similar to the above but passing two images and asking a question about both.
+- `vision_openai_api_2images.py` - similar to the above but passing two images and asking a question about both. THIS EXAMPLE DOES NOT WORK, apparently llama3.2-vision only supports one image (or maybe ollama doesn't support two images). https://www.reddit.com/r/LocalLLaMA/comments/1h7lf9l/how_to_analyze_multiple_images_in_ollama_using/?rdt=49211 . 
