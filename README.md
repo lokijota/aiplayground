@@ -1,7 +1,6 @@
-# Jota's playground - just a space for small experiments
+# Jota's "AI" playground - simple learning experiments
 
-Tests and experiences. Mostly Python.
-
+Tests and experiences. Mostly Python with models running locally in ollama.
 
 # Experiments
 
