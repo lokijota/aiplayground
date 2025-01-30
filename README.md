@@ -6,10 +6,10 @@ Tests and experiences. Mostly Python.
 # Experiments
 
 - [Model completions calling either using http requests or with OpenAI's library, inc structured outputs and image understanding](01.ModelCalling/README.md)
+- [Langchain tutorials and examples](02.Langchain/README.md) (WIP)
 
 # To-do list
 
-- do a langchain sample
 - do a langgraph sample (eg for prompt improvement? use R1 and see https://www.deeplearning.ai/short-courses/reasoning-with-o1/)
 - test autogen / multi-LLM scenario
 - function calling (eg with geocaching as example)
