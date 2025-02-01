@@ -38,8 +38,15 @@ print(f"Num pages: {len(docs)}")
 # - The string content of the page;
 # - Metadata containing the file name and page number.
 
+# Enrich the metadata
+for doc in docs:
+    doc.metadata["author"] = "Eça de Queiroz"
+    doc.metadata["title"] = "Os Maias"
+    doc.metadata["type"] = "book"
+
 print(f"{docs[0].page_content[:200]}\n")
 print(docs[0].metadata) # source document, page, page label (python kvp)
+
 
 # Text splitting https://python.langchain.com/docs/concepts/text_splitters/
 # We will split our documents into chunks of 1000 characters with 200 characters of overlap between chunks. The overlap helps mitigate the
@@ -86,15 +93,21 @@ print(emb2_vector_2[:10])
 # 04. Vector store
 
 from langchain_chroma import Chroma
+import chromadb 
 
-vector_store = Chroma(embedding_function=embedding_model2)
-# vector_store.reset_collection() # always restarts at zero, so this is not needed
+persistent_client = chromadb.PersistentClient(path=".chroma")
+collection = persistent_client.get_or_create_collection("jotaaiplayground")
+
+# non-persistent vs persistent version
+# vector_store = Chroma(embedding_function=embedding_model2, collection_name="jotaaiplayground", )
+vector_store = Chroma(client=persistent_client, embedding_function=embedding_model2, collection_name="jotaaiplayground", )
+
 print(f"Chroma persist folder: {vector_store._persist_directory}")
 
 if vector_store._chroma_collection.count() == 0: # does nothing / not persistent
     ids = vector_store.add_documents(documents=all_splits) # also support update / requires ids
+    print(ids[:5])
 
-print(ids[:5])
 print("Elements in chroma collection:", vector_store._chroma_collection.count())
 
 results = vector_store.similarity_search("Quem é João da Ega?") 
@@ -115,5 +128,67 @@ print("Maria Eduarda?", results[0])
 
 
 ## 05. Retrievers
+# BaseRetriever = Abstract base class for a Document retrieval system.
+# Retriever class returns Documents given a text query.
+# It is more general than a vector store. A retriever does not need to be able to store documents, only to return (or retrieve) it.
+# Vector stores can be used as the backbone of a retriever, but there are other types of retrievers as well.
+# Retrievers from vector stores, retrievers can interface with non-vector store sources of data, as well (such as external APIs).
 
 # TBD https://python.langchain.com/docs/tutorials/retrievers/
+
+from typing import List
+from langchain_core.documents import Document
+from langchain_core.runnables import chain
+
+# Decorate a function with @chain to make it a Runnable. Sets the name of the Runnable to the name of the function.
+# Any runnables called by the function will be traced as dependencies.
+@chain
+def retriever(query: str) -> List[Document]:
+    return vector_store.similarity_search(query, k=1)
+
+result = retriever.batch(
+    [
+        "Quem é Maria Eduarda?",
+        "Qual a relação entre Carlos da Maia e Maria Eduarda?",
+    ],
+)
+
+print(result)
+
+# as an alternative to using the function above with @chain you can also simply use .as_retriever, which returns a VectorStoreRetriever 
+
+# You can also transform the vector store into a retriever for easier usage in your chains. 
+retriever = vector_store.as_retriever(search_type="mmr", search_kwargs={"k": 1, "fetch_k": 5})
+# Can be "similarity" (default), "mmr", or "similarity_score_threshold".
+# mmr = Maximal Marginal Relevance MMR is a method used to avoid redundancy while retrieving relevant items to a query.
+# Instead of merely retrieving the most relevant items (which can often be very similar to each other), MMR ensures a balance
+# between relevancy and diversity in the items retrieved.
+# Note: fetch_k (int) – Number of Documents to fetch to pass to MMR algorithm.
+# MMR ranking provides a useful way to present information to the user that is not redundant. It considers the similarity of keyphrase
+# with the document, along with the similarity of already selected phrases. Read more here:
+# https://medium.com/tech-that-works/maximal-marginal-relevance-to-rerank-results-in-unsupervised-keyphrase-extraction-22d95015c7c5
+
+
+result = retriever.invoke("Qual a relação entre Carlos da Maia e Maria Eduarda?", filter = { "title": "Os Maias"})
+print("----")
+print(result)
+
+retriever = vector_store.as_retriever(search_type="similarity_score_threshold", search_kwargs={"k":1, "score_threshold": 0.5})
+result = retriever.invoke("Qual a relação entre Carlos da Maia e Maria Eduarda?") # , filter={"source": "news"})
+print("----")
+print(result)
+
+
+print("----\n")
+
+# Let's just try summarizing this to see what comes out of it...
+
+model = ChatOpenAI(model="qwq", base_url = 'http://localhost:11434/v1')
+from langchain_core.messages import HumanMessage, SystemMessage
+
+messages = [
+    SystemMessage("Summarize the following content in two short sentences"),
+    HumanMessage(result[0].page_content)
+]
+summary = model.invoke(messages)
+print(summary.content)
