@@ -16,9 +16,9 @@ messages = [
     SystemMessage("Translate the following from English into informal european portuguese"),
     HumanMessage("hi!"),  # how are you and your wife and your dog?"),
 ]
-# if I uncomment the text it just gives me a reply, it doesn't translate anything
+# if I uncomment the text for the HumanMessage it just gives me a reply, it doesn't translate anything
 
-response = model.invoke(messages) # type is AIMessage
+response = model.invoke(messages) # class is AIMessage
 
 print(response.content)
 print(f"Prompt tokens: {response.usage_metadata['input_tokens']}, Output tokens:{response.usage_metadata['output_tokens']} ")

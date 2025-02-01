@@ -30,3 +30,9 @@ From: https://www.reddit.com/r/LocalLLaMA/comments/1frwnpj/llama_32_vision_model
 ## On Llava
 
 Llava has a strange behaviour. It seems to concatenate multiple images and then overlay the text. Semi random outputs and unable to find the response.
+
+## Chroma
+
+Chroma is the open-source AI application database. Batteries included. Embeddings, vector search, document storage, full-text search, metadata filtering, and multi-modal. All in one place. Retrieval that just works. As it should be.
+
+https://docs.trychroma.com/docs/overview/getting-started

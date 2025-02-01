@@ -12,6 +12,7 @@ Tests and experiences. Mostly Python with models running locally in ollama.
 - do a langgraph sample (eg for prompt improvement? use R1 and see https://www.deeplearning.ai/short-courses/reasoning-with-o1/)
 - test autogen / multi-LLM scenario
 - function calling (eg with geocaching as example)
+- mistral small (inc function calling) - https://colab.research.google.com/drive/1zo794DObJNXwj3ohJHx6dI0ALUV0rJYu?usp=sharing
 - summarization (inc data source parsing: txt, md, pdf, word, onenote)
 - embeddings (using different models, inc. tests with hiearchical retrieval)
 - chunking (simple by text size, semantic by heading, with overlaps)
