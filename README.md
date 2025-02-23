@@ -6,6 +6,7 @@ Tests and experiences. Mostly Python with models running locally in ollama.
 
 - [Model completions calling either using http requests or with OpenAI's library, inc structured outputs and image understanding](01.ModelCalling/README.md)
 - [Langchain tutorials and examples](02.Langchain/README.md) (WIP)
+- [Hugging Face Agents course (first edition)](10.HuggingFaceAgentsCourse/README.md) (ongoing)
 
 # To-do list
 

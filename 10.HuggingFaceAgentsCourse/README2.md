@@ -189,6 +189,17 @@ We’ve now learned the Agent’s Thought-Action-Observation Cycle.
 
 Now, it’s time to put your knowledge into practice by coding your very first Agent!
 
+### Dummy Agent Library - https://huggingface.co/learn/agents-course/unit1/dummy-agent-library
 
+I put my notebook code [here](dummy_agent_library.ipynb)
 
-[Continue (this page is too long already)](README3.md)
+### Let’s Create Our First Agent Using smolagents
+
+Overview about smolagents: https://huggingface.co/blog/smolagents
+
+My clone is here: https://huggingface.co/spaces/lokijota/First_agent_template/tree/main
+
+I have just added the duckduckgo agent to the configuration.
+Going to the files, I don't quite understand what's in the `prompts.yaml` file. Seems like the overal configuration of the agent? the file `agent.json` also has prompt-like configurations with the same sections as `prompts.yaml`
+
+[Continue to Bonus Unit 1](02.BonusUnit1.md)
